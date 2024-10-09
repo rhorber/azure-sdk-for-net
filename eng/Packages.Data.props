@@ -115,7 +115,7 @@
     <PackageReference Update="Azure.Data.Tables" Version="12.8.0" />
     <PackageReference Update="Azure.Messaging.EventHubs" Version="5.11.5" />
     <PackageReference Update="Azure.Messaging.EventGrid" Version="4.21.0" />
-    <PackageReference Update="Azure.Messaging.ServiceBus" Version="7.18.1" />
+    <PackageReference Update="Azure.Messaging.ServiceBus" Version="7.18.2" />
     <PackageReference Update="Azure.Messaging.WebPubSub" Version="1.4.0" />
     <PackageReference Update="Azure.MixedReality.Authentication" version= "1.2.0" />
     <PackageReference Update="Azure.Monitor.OpenTelemetry.Exporter" Version="1.4.0-beta.1" />
@@ -178,6 +178,11 @@
     <PackageReference Update="OpenAI" Version="2.1.0-beta.1" />
   </ItemGroup>
 
+  <ItemGroup Condition="$(MSBuildProjectName.StartsWith('Azure.Developer.MicrosoftPlaywrightTesting'))">
+    <PackageReference Update="Microsoft.TestPlatform.ObjectModel" Version="17.10.0" />
+    <PackageReference Update="NUnit" Version="3.13.2" />
+  </ItemGroup>
+
   <!--
     Dependency versions for Track 2, Microsoft.* libraries.
     These are dependencies for Track 2 integration packages
@@ -223,7 +228,7 @@
     All should have PrivateAssets="All" set so they don't become package dependencies
   -->
   <ItemGroup>
-    <PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version="3.0.0-beta.20240926.1" PrivateAssets="All" />
+    <PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version="3.0.0-beta.20241007.1" PrivateAssets="All" />
     <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20240813.2" PrivateAssets="All" />
     <PackageReference Update="coverlet.collector" Version="3.2.0" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="All" />
@@ -250,7 +255,7 @@
     <PackageReference Update="Azure.Identity" Version="1.12.0" />
     <PackageReference Update="Azure.Messaging.EventGrid" Version="4.17.0" />
     <PackageReference Update="Azure.Messaging.EventHubs.Processor" Version="5.11.3" />
-    <PackageReference Update="Azure.Messaging.ServiceBus" Version="7.18.1" />
+    <PackageReference Update="Azure.Messaging.ServiceBus" Version="7.18.2" />
     <PackageReference Update="Azure.ResourceManager.Compute" Version="1.2.0" />
     <PackageReference Update="Azure.ResourceManager.CognitiveServices" Version="1.3.0" />
     <PackageReference Update="Azure.ResourceManager.KeyVault" Version="1.1.0" />
