@@ -1,14 +1,10 @@
 # Release History
 
-## 1.0.0-beta.5 (Unreleased)
+## 1.0.0-beta.5 (2026-03-03)
 
 ### Features Added
 
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
+- Regenerated from `Azure.ResourceManager.ContainerService` version 1.3.1.
 
 ## 1.0.0-beta.4 (2025-06-25)
 
