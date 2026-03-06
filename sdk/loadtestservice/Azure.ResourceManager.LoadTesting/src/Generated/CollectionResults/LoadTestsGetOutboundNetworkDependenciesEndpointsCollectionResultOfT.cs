@@ -14,21 +14,21 @@ using Azure.ResourceManager.LoadTesting.Models;
 
 namespace Azure.ResourceManager.LoadTesting
 {
-    internal partial class LoadTestMgmtClientGetOutboundNetworkDependenciesEndpointsCollectionResultOfT : Pageable<LoadTestingOutboundEnvironmentEndpoint>
+    internal partial class LoadTestsGetOutboundNetworkDependenciesEndpointsCollectionResultOfT : Pageable<LoadTestingOutboundEnvironmentEndpoint>
     {
-        private readonly LoadTestMgmtClient _client;
+        private readonly LoadTests _client;
         private readonly Guid _subscriptionId;
         private readonly string _resourceGroupName;
         private readonly string _loadTestName;
         private readonly RequestContext _context;
 
-        /// <summary> Initializes a new instance of LoadTestMgmtClientGetOutboundNetworkDependenciesEndpointsCollectionResultOfT, which is used to iterate over the pages of a collection. </summary>
-        /// <param name="client"> The LoadTestMgmtClient client used to send requests. </param>
+        /// <summary> Initializes a new instance of LoadTestsGetOutboundNetworkDependenciesEndpointsCollectionResultOfT, which is used to iterate over the pages of a collection. </summary>
+        /// <param name="client"> The LoadTests client used to send requests. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="loadTestName"> Load Test name. </param>
         /// <param name="context"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        public LoadTestMgmtClientGetOutboundNetworkDependenciesEndpointsCollectionResultOfT(LoadTestMgmtClient client, Guid subscriptionId, string resourceGroupName, string loadTestName, RequestContext context) : base(context?.CancellationToken ?? default)
+        public LoadTestsGetOutboundNetworkDependenciesEndpointsCollectionResultOfT(LoadTests client, Guid subscriptionId, string resourceGroupName, string loadTestName, RequestContext context) : base(context?.CancellationToken ?? default)
         {
             _client = client;
             _subscriptionId = subscriptionId;
@@ -37,10 +37,10 @@ namespace Azure.ResourceManager.LoadTesting
             _context = context;
         }
 
-        /// <summary> Gets the pages of LoadTestMgmtClientGetOutboundNetworkDependenciesEndpointsCollectionResultOfT as an enumerable collection. </summary>
+        /// <summary> Gets the pages of LoadTestsGetOutboundNetworkDependenciesEndpointsCollectionResultOfT as an enumerable collection. </summary>
         /// <param name="continuationToken"> A continuation token indicating where to resume paging. </param>
         /// <param name="pageSizeHint"> The number of items per page. </param>
-        /// <returns> The pages of LoadTestMgmtClientGetOutboundNetworkDependenciesEndpointsCollectionResultOfT as an enumerable collection. </returns>
+        /// <returns> The pages of LoadTestsGetOutboundNetworkDependenciesEndpointsCollectionResultOfT as an enumerable collection. </returns>
         public override IEnumerable<Page<LoadTestingOutboundEnvironmentEndpoint>> AsPages(string continuationToken, int? pageSizeHint)
         {
             Uri nextPage = continuationToken != null ? new Uri(continuationToken) : null;
