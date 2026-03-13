@@ -18,7 +18,8 @@ namespace Azure.Generator.Management.Models;
 /// <param name="SingletonResourceName"> The singleton resource name, if applicable. </param>
 /// <param name="ParentResourceId"> The parent resource ID pattern, if applicable. </param>
 /// <param name="ChildResourceIds"> The list of child resource ID patterns. </param>
-public record ResourceMetadata(
+/// <param name="NameConstraints"> The name constraints for the resource. </param>
+public record ArmResourceMetadata(
     string ResourceIdPattern,
     string ResourceName,
     string ResourceType,
@@ -27,10 +28,11 @@ public record ResourceMetadata(
     IReadOnlyList<ResourceMethod> Methods,
     string? SingletonResourceName,
     string? ParentResourceId,
-    IReadOnlyList<string> ChildResourceIds)
+    IReadOnlyList<string> ChildResourceIds,
+    ArmResourceNameConstraints NameConstraints)
 {
     // ChildResourceIds is currently unpopulated and passed in as an empty array
-    internal static ResourceMetadata DeserializeResourceMetadata(JsonElement element, InputModelType inputModel, IReadOnlyList<string> childResourceIds)
+    internal static ArmResourceMetadata DeserializeResourceMetadata(JsonElement element, InputModelType inputModel, IReadOnlyList<string> childResourceIds)
     {
         string? resourceIdPattern = null;
         string? resourceType = null;
@@ -82,6 +84,12 @@ public record ResourceMetadata(
             resourceName = resourceNameElement.GetString();
         }
 
+        ArmResourceNameConstraints nameConstraints = new(null, null, null);
+        if (element.TryGetProperty("nameConstraints", out var nameConstraintsElement))
+        {
+            nameConstraints = ArmResourceNameConstraints.DeserializeNameConstraints(nameConstraintsElement);
+        }
+
         return new(
             resourceIdPattern ?? throw new InvalidOperationException("resourceIdPattern cannot be null"),
             resourceName ?? throw new InvalidOperationException("resourceName cannot be null"),
@@ -91,6 +99,7 @@ public record ResourceMetadata(
             methods,
             singletonResourceName,
             parentResource,
-            childResourceIds);
+            childResourceIds,
+            nameConstraints);
     }
 }
