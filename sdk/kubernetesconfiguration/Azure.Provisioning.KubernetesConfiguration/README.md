@@ -1,6 +1,6 @@
-# Azure Provisioning Kubernetes client library for .NET
+# Azure Provisioning KubernetesConfiguration client library for .NET
 
-Azure.Provisioning.Kubernetes simplifies declarative resource provisioning in .NET.
+Azure.Provisioning.KubernetesConfiguration simplifies declarative resource provisioning in .NET.
 
 ## Getting started
 
@@ -9,7 +9,7 @@ Azure.Provisioning.Kubernetes simplifies declarative resource provisioning in .N
 Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
 
 ```dotnetcli
-dotnet add package Azure.Provisioning.Kubernetes --prerelease
+dotnet add package Azure.Provisioning.KubernetesConfiguration --prerelease
 ```
 
 ### Prerequisites
@@ -21,6 +21,23 @@ dotnet add package Azure.Provisioning.Kubernetes --prerelease
 ## Key concepts
 
 This library allows you to specify your infrastructure in a declarative style using dotnet.  You can then use azd to deploy your infrastructure to Azure directly without needing to write or maintain bicep or arm templates.
+
+## Examples
+
+### Create a Kubernetes Cluster Extension
+
+This example demonstrates how to define a Kubernetes cluster extension resource for an Azure Arc-enabled cluster.
+
+```C# Snippet:KubernetesConfigurationBasic
+Infrastructure infra = new();
+
+KubernetesClusterExtension extension =
+    new(nameof(extension), KubernetesClusterExtension.ResourceVersions.V2024_11_01)
+    {
+        ExtensionType = "microsoft.flux"
+    };
+infra.Add(extension);
+```
 
 ## Troubleshooting
 
