@@ -691,6 +691,7 @@ public class AgentsTests : AgentsTestBase
     [TestCase(ToolType.FileSearch)]
     [TestCase(ToolType.ImageGeneration)]
     [TestCase(ToolType.WebSearch)]
+    [TestCase(ToolType.WebSearchPreview)]
     [TestCase(ToolType.WebSearchCustom)]
     [TestCase(ToolType.Memory)]
     [TestCase(ToolType.AzureAISearch)]
@@ -762,7 +763,7 @@ public class AgentsTests : AgentsTestBase
                 Assert.That(Regex.Match(response.GetOutputText().ToLower(), expectedResponse.ToLower()).Success, Is.True, $"The output: \"{response.GetOutputText()}\" does not contain {expectedResponse}");
             }
         }
-        if (toolType == ToolType.AzureAISearch | toolType == ToolType.BingGrounding | toolType == ToolType.BingGroundingCustom | toolType == ToolType.Sharepoint | toolType == ToolType.MicrosoftFabric | toolType == ToolType.WebSearch | toolType == ToolType.WebSearchCustom)
+        if (toolType == ToolType.AzureAISearch || toolType == ToolType.BingGrounding || toolType == ToolType.BingGroundingCustom || toolType == ToolType.Sharepoint || toolType == ToolType.MicrosoftFabric || toolType == ToolType.WebSearch || toolType == ToolType.WebSearchCustom || toolType == ToolType.WebSearchPreview)
         {
             bool isUriCitationFound = false;
 
@@ -791,6 +792,7 @@ public class AgentsTests : AgentsTestBase
     [TestCase(ToolType.CodeInterpreterGen)]
     [TestCase(ToolType.Memory)]
     [TestCase(ToolType.WebSearch)]
+    [TestCase(ToolType.WebSearchPreview)]
     [TestCase(ToolType.WebSearchCustom)]
     [TestCase(ToolType.AzureAISearch)]
     [TestCase(ToolType.BingGrounding)]
@@ -854,7 +856,7 @@ public class AgentsTests : AgentsTestBase
                             }
                         }
                     }
-                    if (toolType == ToolType.AzureAISearch | toolType == ToolType.BingGrounding | toolType == ToolType.BingGroundingCustom | toolType == ToolType.Sharepoint | toolType == ToolType.MicrosoftFabric | toolType == ToolType.WebSearch | toolType == ToolType.WebSearchCustom)
+                    if (toolType == ToolType.AzureAISearch || toolType == ToolType.BingGrounding || toolType == ToolType.BingGroundingCustom || toolType == ToolType.Sharepoint || toolType == ToolType.MicrosoftFabric || toolType == ToolType.WebSearch || toolType == ToolType.WebSearchCustom || toolType == ToolType.WebSearchPreview)
                     {
                         annotationMet |= ContainsAnnotation(itemDoneUpdate.Item, toolType);
                     }
