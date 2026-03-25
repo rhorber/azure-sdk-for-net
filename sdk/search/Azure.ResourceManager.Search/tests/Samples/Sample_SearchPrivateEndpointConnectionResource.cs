@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Search.Samples
             SearchPrivateEndpointConnectionResource searchPrivateEndpointConnection = client.GetSearchPrivateEndpointConnectionResource(searchPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            SearchPrivateEndpointConnectionResource result = await searchPrivateEndpointConnection.GetAsync();
+            SearchPrivateEndpointConnectionResource result = await searchPrivateEndpointConnection.GetAsync(new SearchManagementRequestOptions());
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Search.Samples
             SearchPrivateEndpointConnectionResource searchPrivateEndpointConnection = client.GetSearchPrivateEndpointConnectionResource(searchPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            ArmOperation<SearchPrivateEndpointConnectionResource> lro = await searchPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
+            ArmOperation<SearchPrivateEndpointConnectionResource> lro = await searchPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed, new SearchManagementRequestOptions());
             SearchPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Search.Samples
                     },
                 },
             };
-            ArmOperation<SearchPrivateEndpointConnectionResource> lro = await searchPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data);
+            ArmOperation<SearchPrivateEndpointConnectionResource> lro = await searchPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data, new SearchManagementRequestOptions());
             SearchPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

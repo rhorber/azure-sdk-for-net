@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Search.Samples
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
             // invoke the operation and iterate over the result
-            await foreach (SearchServiceResource item in subscriptionResource.GetSearchServicesAsync())
+            await foreach (SearchServiceResource item in subscriptionResource.GetSearchServicesAsync(new SearchManagementRequestOptions()))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             SearchServiceNameAvailabilityContent content = new SearchServiceNameAvailabilityContent("mysearchservice");
-            SearchServiceNameAvailabilityResult result = await subscriptionResource.CheckSearchServiceNameAvailabilityAsync(content);
+            SearchServiceNameAvailabilityResult result = await subscriptionResource.CheckSearchServiceNameAvailabilityAsync(content, new SearchManagementRequestOptions());
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation and iterate over the result
             AzureLocation location = new AzureLocation("westus");
-            await foreach (QuotaUsageResult item in subscriptionResource.GetUsagesBySubscriptionAsync(location))
+            await foreach (QuotaUsageResult item in subscriptionResource.GetUsagesBySubscriptionAsync(location, new SearchManagementRequestOptions()))
             {
                 Console.WriteLine($"Succeeded: {item}");
             }
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Search.Samples
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
             string skuName = "free";
-            QuotaUsageResult result = await subscriptionResource.UsageBySubscriptionSkuAsync(location, skuName);
+            QuotaUsageResult result = await subscriptionResource.UsageBySubscriptionSkuAsync(location, skuName, new SearchManagementRequestOptions());
 
             Console.WriteLine($"Succeeded: {result}");
         }

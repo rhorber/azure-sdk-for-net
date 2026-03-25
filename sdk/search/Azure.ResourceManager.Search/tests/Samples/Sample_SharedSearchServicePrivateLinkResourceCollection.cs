@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Search.Samples
                     ResourceRegion = default,
                 },
             };
-            ArmOperation<SharedSearchServicePrivateLinkResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, sharedPrivateLinkResourceName, data);
+            ArmOperation<SharedSearchServicePrivateLinkResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, sharedPrivateLinkResourceName, data, new SearchManagementRequestOptions());
             SharedSearchServicePrivateLinkResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             string sharedPrivateLinkResourceName = "testResource";
-            SharedSearchServicePrivateLinkResource result = await collection.GetAsync(sharedPrivateLinkResourceName);
+            SharedSearchServicePrivateLinkResource result = await collection.GetAsync(sharedPrivateLinkResourceName, new SearchManagementRequestOptions());
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Search.Samples
             SharedSearchServicePrivateLinkResourceCollection collection = searchService.GetSharedSearchServicePrivateLinkResources();
 
             // invoke the operation and iterate over the result
-            await foreach (SharedSearchServicePrivateLinkResource item in collection.GetAllAsync())
+            await foreach (SharedSearchServicePrivateLinkResource item in collection.GetAllAsync(new SearchManagementRequestOptions()))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
@@ -156,7 +156,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             string sharedPrivateLinkResourceName = "testResource";
-            bool result = await collection.ExistsAsync(sharedPrivateLinkResourceName);
+            bool result = await collection.ExistsAsync(sharedPrivateLinkResourceName, new SearchManagementRequestOptions());
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -186,7 +186,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             string sharedPrivateLinkResourceName = "testResource";
-            NullableResponse<SharedSearchServicePrivateLinkResource> response = await collection.GetIfExistsAsync(sharedPrivateLinkResourceName);
+            NullableResponse<SharedSearchServicePrivateLinkResource> response = await collection.GetIfExistsAsync(sharedPrivateLinkResourceName, new SearchManagementRequestOptions());
             SharedSearchServicePrivateLinkResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Search.Samples
                     },
                 },
             };
-            ArmOperation<SearchPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
+            ArmOperation<SearchPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data, new SearchManagementRequestOptions());
             SearchPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546";
-            SearchPrivateEndpointConnectionResource result = await collection.GetAsync(privateEndpointConnectionName);
+            SearchPrivateEndpointConnectionResource result = await collection.GetAsync(privateEndpointConnectionName, new SearchManagementRequestOptions());
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Search.Samples
             SearchPrivateEndpointConnectionCollection collection = searchService.GetSearchPrivateEndpointConnections();
 
             // invoke the operation and iterate over the result
-            await foreach (SearchPrivateEndpointConnectionResource item in collection.GetAllAsync())
+            await foreach (SearchPrivateEndpointConnectionResource item in collection.GetAllAsync(new SearchManagementRequestOptions()))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546";
-            bool result = await collection.ExistsAsync(privateEndpointConnectionName);
+            bool result = await collection.ExistsAsync(privateEndpointConnectionName, new SearchManagementRequestOptions());
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -187,7 +187,7 @@ namespace Azure.ResourceManager.Search.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546";
-            NullableResponse<SearchPrivateEndpointConnectionResource> response = await collection.GetIfExistsAsync(privateEndpointConnectionName);
+            NullableResponse<SearchPrivateEndpointConnectionResource> response = await collection.GetIfExistsAsync(privateEndpointConnectionName, new SearchManagementRequestOptions());
             SearchPrivateEndpointConnectionResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

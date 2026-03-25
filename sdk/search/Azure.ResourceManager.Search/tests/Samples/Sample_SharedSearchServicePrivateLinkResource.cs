@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Search.Samples
             SharedSearchServicePrivateLinkResource sharedSearchServicePrivateLinkResource = client.GetSharedSearchServicePrivateLinkResource(sharedSearchServicePrivateLinkResourceId);
 
             // invoke the operation
-            SharedSearchServicePrivateLinkResource result = await sharedSearchServicePrivateLinkResource.GetAsync();
+            SharedSearchServicePrivateLinkResource result = await sharedSearchServicePrivateLinkResource.GetAsync(new SearchManagementRequestOptions());
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Search.Samples
             SharedSearchServicePrivateLinkResource sharedSearchServicePrivateLinkResource = client.GetSharedSearchServicePrivateLinkResource(sharedSearchServicePrivateLinkResourceId);
 
             // invoke the operation
-            await sharedSearchServicePrivateLinkResource.DeleteAsync(WaitUntil.Completed);
+            await sharedSearchServicePrivateLinkResource.DeleteAsync(WaitUntil.Completed, new SearchManagementRequestOptions());
 
             Console.WriteLine("Succeeded");
         }
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Search.Samples
                     ResourceRegion = default,
                 },
             };
-            ArmOperation<SharedSearchServicePrivateLinkResource> lro = await sharedSearchServicePrivateLinkResource.UpdateAsync(WaitUntil.Completed, data);
+            ArmOperation<SharedSearchServicePrivateLinkResource> lro = await sharedSearchServicePrivateLinkResource.UpdateAsync(WaitUntil.Completed, data, new SearchManagementRequestOptions());
             SharedSearchServicePrivateLinkResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
