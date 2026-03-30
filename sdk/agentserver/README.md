@@ -8,7 +8,7 @@ The Azure AI Agent Server libraries let you build ASP.NET Core servers that impl
 |---------|-------------|-------|
 | [Azure.AI.AgentServer.Core](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/agentserver/Azure.AI.AgentServer.Core) | Shared hosting foundation: library-owned ASP.NET Core host with OpenTelemetry, health checks, server user-agent header, and multi-protocol composition. | [![NuGet](https://img.shields.io/nuget/vpre/Azure.AI.AgentServer.Core.svg)](https://www.nuget.org/packages/Azure.AI.AgentServer.Core) |
 | Azure.AI.AgentServer.Responses *(coming soon)* | Responses protocol implementation: SSE streaming, background execution, response lifecycle management, and `IResponseHandler` interface. | [![NuGet](https://img.shields.io/nuget/vpre/Azure.AI.AgentServer.Responses.svg)](https://www.nuget.org/packages/Azure.AI.AgentServer.Responses) |
-| Azure.AI.AgentServer.Invocations *(coming soon)* | Invocations protocol implementation: `InvocationHandler` abstract class, session resolution, client header forwarding, and invocation lifecycle. | [![NuGet](https://img.shields.io/nuget/vpre/Azure.AI.AgentServer.Invocations.svg)](https://www.nuget.org/packages/Azure.AI.AgentServer.Invocations) |
+| [Azure.AI.AgentServer.Invocations](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/agentserver/Azure.AI.AgentServer.Invocations) | Invocations protocol implementation: `InvocationHandler` abstract class, session resolution, client header forwarding, and invocation lifecycle. | [![NuGet](https://img.shields.io/nuget/vpre/Azure.AI.AgentServer.Invocations.svg)](https://www.nuget.org/packages/Azure.AI.AgentServer.Invocations) |
 
 ## When to use which package
 
@@ -19,19 +19,25 @@ The Azure AI Agent Server libraries let you build ASP.NET Core servers that impl
 
 ## Getting started
 
-The fastest way to get a server running:
+The fastest way to get an Invocations protocol server running:
 
-```csharp
-using Azure.AI.AgentServer.Core;
+```C# Snippet:Invocations_Sample1_StartServer
+InvocationsServer.Run<EchoHandler>();
+```
 
-var builder = AgentHost.CreateBuilder();
+Where `EchoHandler` implements the Invocations protocol:
 
-// Protocol packages provide extension methods to register their endpoints.
-// Example (requires a protocol package such as Azure.AI.AgentServer.Responses):
-// builder.AddResponses<MyHandler>();
-
-var app = builder.Build();
-app.Run();
+```C# Snippet:Invocations_Sample1_EchoHandler
+public class EchoHandler : InvocationHandler
+{
+    public override async Task HandleAsync(
+        HttpRequest request, HttpResponse response,
+        InvocationContext context, CancellationToken cancellationToken)
+    {
+        var input = await new StreamReader(request.Body).ReadToEndAsync(cancellationToken);
+        await response.WriteAsync($"You said: {input}", cancellationToken);
+    }
+}
 ```
 
 See each package's README for detailed getting started instructions.
